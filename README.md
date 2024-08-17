@@ -1,4 +1,4 @@
-# Minimal Linux Live
+# Hell Linux Live
 
 * [Overview](#overview)
 * [Current development state](#current-development-state)
@@ -14,19 +14,15 @@
 * [Related projects](#related-projects)
 * [Thank you!](#thank-you)
 
-### Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/ivandavidov/minimal.svg)](https://starchart.cc/ivandavidov/minimal)
-
 ---
 
 ### Overview
 
-Minimal Linux Live (MLL) is a tiny educational Linux distribution, which is designed to be built from scratch by using a collection of automated shell scripts. Minimal Linux Live offers a core environment with just the Linux kernel, GNU C library, and Busybox userland utilities. Additional software can be included in the ISO image at build time by using a well-documented [configuration file](src/.config).
+Hell Linux is a tiny educational Linux distribution, which is designed to be built from scratch by using a collection of automated shell scripts. Hell Linux offers a core environment with just the Linux kernel, GNU C library, and Busybox userland utilities. Additional software can be included in the ISO image at build time by using a well-documented [configuration file](src/.config).
 
-The generated ISO image file contains Linux kernel, GNU C library compiled with default options, Busybox compiled with default options, quite simple initramfs structure and some "overlay bundles" (the default build process provides few overlay bundles). You don't get Windows support out of the box, nor you get any fancy desktop environment (refer to the [Debootstrap Live](https://github.com/zac87/debootstrap_live) project if you need minimal system with network and UI). All you get is a simple shell console with default Busybox applets, network support via DHCP and... well, that's all. This is why it's called "minimal".
+The generated ISO image file contains Linux kernel, GNU C library compiled with default options, Busybox compiled with default options, quite simple initramfs structure and some "overlay bundles" (the default build process provides few overlay bundles). You don't get Windows support out of the box, nor you get any fancy desktop environment (refer to the [Debootstrap Live](https://github.com/zac87/debootstrap_live) project if you need minimal system with network and UI). All you get is a simple shell console with default Busybox applets, network support via DHCP and... well, that's all.
  
-Note that by default Minimal Linux Live provides support for legacy BIOS systems. You can change the build configuration settings in the [.config](src/.config) file and rebuild MLL with support for modern UEFI systems.
+Note that by default Hell Linux provides support for legacy BIOS systems. You can change the build configuration settings in the [.config](src/.config) file and rebuild MLL with support for modern UEFI systems.
  
 All build scripts are well organized and quite small in size. You can easily learn from the scripts, reverse engineer the build process and later modify them to include more stuff (I encourage you to do so). After you learn the basics, you will have all the necessary tools and skills to create your own fully functional Linux based operating system which you have built entirely from scratch.
 
@@ -53,23 +49,13 @@ Did I mention the [YouTube channel](https://youtu.be/u5KYDaCLChc?list=PLe3TW5jDb
 
 ### Current development state
 
-As of **09-Jun-2022**:
+As of **09-Jun-2024**:
 
-* Linux kernel 5.18.3
-* GNU C Library 2.35
+* Linux kernel 6.9.9
+* GNU C Library 2.40
 * Busybox 1.34.1
 
 Stable build on default Ubuntu 22.04 installation with applied system updates.
-
-Here are some screenshots of the latest published version of Minimal Linux Live:
-
-![Minimal Linux Live](docs/assets/img/minimal_linux_live.png)
-
-![Minimal Linux Live Readme](docs/assets/img/readme_in_mll.png)
-
-You can experiment with Minimal Linux Live directly in your browser by using [JavaScript PC Emulator](http://minimal.idzona.com/emulator "Minimal Linux Live in JavaScript PC emulator"). Here is a screenshot:
-
-![Minimal Linux Live JavaScript Emulator](docs/assets/img/emulator_01.jpg)
 
 ### MLL on ARM (AArch64)
 
@@ -80,7 +66,7 @@ A preview of MLL on ARM (AArch64) can be found in the branch [aarch64](https://g
 * Execute scripts 00 to 10.
 * Execute [qemu-aarch64.sh](https://github.com/ivandavidov/minimal/blob/aarch64/src/qemu-aarch64.sh) and then switch to the QEMU serial console.
 
-![Minimal Linux Live on ARM64 (AArch64)](docs/assets/img/mll-aarch64.png)
+![Hell Linux on ARM64 (AArch64)](docs/assets/img/mll-aarch64.png)
 
 ### Future improvements
 
@@ -123,7 +109,7 @@ The default build process uses some custom provided ``CFLAGS``. They can be foun
 
 **Important note!** Most of the overlay bundles come with no support since the build process for almost all of them is host specific and can vary significantly between different machines. Some overlay bundles have no dependencies to the host machine, e.g. the bundles which provide the DHCP functionality and the MLL source code. These bundles are enabled by default.
 
-Minimal Linux Live has the concept of ``overlay bundles``. During the boot process the ``OverlayFS`` driver merges the initramfs with the content of these bundles. This is the mechanism which allows you to provide additional software on top of MLL without touching the core build process. In fact the overlay bundle system has been designed to be completely independent from the MLL build process. You can build one or more overlay bundles without building MLL at all. However, some of the overlay bundles have dependencies on the software pieces provided by the MLL build process, so it is recommended to use the overlay build subsystem after you have produced the 'initramfs' area.
+Hell Linux has the concept of ``overlay bundles``. During the boot process the ``OverlayFS`` driver merges the initramfs with the content of these bundles. This is the mechanism which allows you to provide additional software on top of MLL without touching the core build process. In fact the overlay bundle system has been designed to be completely independent from the MLL build process. You can build one or more overlay bundles without building MLL at all. However, some of the overlay bundles have dependencies on the software pieces provided by the MLL build process, so it is recommended to use the overlay build subsystem after you have produced the 'initramfs' area.
 
 The overlay bundle system provides dependency management. If bundle 'b' depends on bundle 'a' you don't need to build bundle 'a' manually in advance. The bundle dependencies are described in special metadata file ``bundle_deps`` and all such dependencies are prepared automatically.
 
@@ -163,25 +149,9 @@ static-get -s tetris
 static-get -i vitetris
 ```
 
-### GraalVM
-
-The current development version of MLL partially supports [GraalVM](http://graalvm.org) (provided as overlay bundle). Note that GraalVM has runtime dependencies on ``GCC`` and ``Bash`` and therefore some GraalVM feature are not supported in MLL, e.g. the ``gu`` updater and almost all GVM language wrapper scripts, including the ``R`` wrappers. Nevertheless, the core GVM features work fine. Java, Python, Ruby, Node and JavaScript work in MLL/GraalVM environment. Great, isn't it! :)
-
-![GraalVM languages](docs/assets/img/graal/graal_1.jpg)
-
-![GraalVM - Java](docs/assets/img/graal/graal_2.jpg)
-
-![GraalVM - Python](docs/assets/img/graal/graal_3.jpg)
-
-![GraalVM - Ruby](docs/assets/img/graal/graal_4.jpg)
-
-![GraalVM - Node](docs/assets/img/graal/graal_5.jpg)
-
-![GraalVM - JS](docs/assets/img/graal/graal_6.jpg)
-
 ### BIOS and UEFI
 
-Minimal Linux Live can be used on UEFI systems (as of version ``28-Jan-2018``) thanks to the [systemd-boot](https://github.com/ivandavidov/systemd-boot) project. There are three build flavors that you can choose from:
+Hell Linux can be used on UEFI systems (as of version ``28-Jan-2018``) thanks to the [systemd-boot](https://github.com/ivandavidov/systemd-boot) project. There are three build flavors that you can choose from:
 
 * ``bios`` - MLL will be bootable only on legacy BIOS based systems. This is the default build flavor.
 * ``uefi`` - MLL will be bootable only on UEFI based systems.
@@ -201,7 +171,7 @@ Yet another way to install MLL on USB flash drive is by using the ``dd`` tool:
 
 ```
 # Directly write the ISO image to your USB flash device (e.g. /dev/xxx)
-dd if=minimal_linux_live.iso of=/dev/xxx
+dd if=hell_linux.iso of=/dev/xxx
 ```
 
 The USB flash device will be recognized as bootable device and you should be able to boot MLL successfully from it. If you have chosen the 'combined' build flavor (i.e. value ``both`` for the corresponding configuration property), then your USB flash device will be bootable on both legacy BIOS and modern UEFI based systems.
@@ -219,7 +189,7 @@ docker run -it minimal-linux-live /bin/sh
 It is also possible to start MLL over network, using PXE mechanism (often called PXE diskless boot). To achieve that, before building MLL, edit src/.config and set ``OVERLAY_LOCATION`` to ``rootfs`` instead of default ``iso``. Then follow build process, which will build the minimal_linux_live.iso. Extract kernel and rootfs from this iso, and assuming webserver is using ``/var/www/html/`` folder as index, copy files here:
 
 ```
-mount minimal_linux_live.iso /mnt
+mount hell_linux.iso /mnt
 cp -a /mnt/boot/kernel.xz /var/www/html/
 cp -a /mnt/boot/rootfs.xz /var/www/html/
 ```
@@ -292,6 +262,6 @@ List of cool forks, spin-offs and other related projects inspired by Minimal Lin
 
 ### Thank you!
 
-Don't miss the chance to share your honest opinion about MLL in [DistroWatch](http://distrowatch.com/dwres.php?resource=ratings&distro=mll). And don't forget to check the Minimal Linux Live page on [Facebook](http://facebook.com/MinimalLinuxLive).
+Big thanks to [ivandavidov](https://github.com/ivandavidov/minimal) for the base code which this fork is based on.
 
 Thank you for your support!
