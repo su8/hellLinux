@@ -18,11 +18,11 @@
 
 ### Overview
 
-Minimal Linux Live (MLL) is a tiny educational Linux distribution, which is designed to be built from scratch by using a collection of automated shell scripts. Minimal Linux Live offers a core environment with just the Linux kernel, GNU C library, and Busybox userland utilities. Additional software can be included in the ISO image at build time by using a well-documented [configuration file](src/.config).
+Hell Linux is a tiny educational Linux distribution, which is designed to be built from scratch by using a collection of automated shell scripts. Hell Linux offers a core environment with just the Linux kernel, GNU C library, and Busybox userland utilities. Additional software can be included in the ISO image at build time by using a well-documented [configuration file](src/.config).
 
-The generated ISO image file contains Linux kernel, GNU C library compiled with default options, Busybox compiled with default options, quite simple initramfs structure and some "overlay bundles" (the default build process provides few overlay bundles). You don't get Windows support out of the box, nor you get any fancy desktop environment (refer to the [Debootstrap Live](https://github.com/zac87/debootstrap_live) project if you need minimal system with network and UI). All you get is a simple shell console with default Busybox applets, network support via DHCP and... well, that's all. This is why it's called "minimal".
+The generated ISO image file contains Linux kernel, GNU C library compiled with default options, Busybox compiled with default options, quite simple initramfs structure and some "overlay bundles" (the default build process provides few overlay bundles). You don't get Windows support out of the box, nor you get any fancy desktop environment (refer to the [Debootstrap Live](https://github.com/zac87/debootstrap_live) project if you need minimal system with network and UI). All you get is a simple shell console with default Busybox applets, network support via DHCP and... well, that's all.
  
-Note that by default Minimal Linux Live provides support for legacy BIOS systems. You can change the build configuration settings in the [.config](src/.config) file and rebuild MLL with support for modern UEFI systems.
+Note that by default Hell Linux provides support for legacy BIOS systems. You can change the build configuration settings in the [.config](src/.config) file and rebuild MLL with support for modern UEFI systems.
  
 All build scripts are well organized and quite small in size. You can easily learn from the scripts, reverse engineer the build process and later modify them to include more stuff (I encourage you to do so). After you learn the basics, you will have all the necessary tools and skills to create your own fully functional Linux based operating system which you have built entirely from scratch.
 
@@ -49,10 +49,10 @@ Did I mention the [YouTube channel](https://youtu.be/u5KYDaCLChc?list=PLe3TW5jDb
 
 ### Current development state
 
-As of **09-Jun-2022**:
+As of **09-Jun-2024**:
 
-* Linux kernel 5.18.3
-* GNU C Library 2.35
+* Linux kernel 6.9.9
+* GNU C Library 2.40
 * Busybox 1.34.1
 
 Stable build on default Ubuntu 22.04 installation with applied system updates.
@@ -66,7 +66,7 @@ A preview of MLL on ARM (AArch64) can be found in the branch [aarch64](https://g
 * Execute scripts 00 to 10.
 * Execute [qemu-aarch64.sh](https://github.com/ivandavidov/minimal/blob/aarch64/src/qemu-aarch64.sh) and then switch to the QEMU serial console.
 
-![Minimal Linux Live on ARM64 (AArch64)](docs/assets/img/mll-aarch64.png)
+![Hell Linux on ARM64 (AArch64)](docs/assets/img/mll-aarch64.png)
 
 ### Future improvements
 
@@ -109,7 +109,7 @@ The default build process uses some custom provided ``CFLAGS``. They can be foun
 
 **Important note!** Most of the overlay bundles come with no support since the build process for almost all of them is host specific and can vary significantly between different machines. Some overlay bundles have no dependencies to the host machine, e.g. the bundles which provide the DHCP functionality and the MLL source code. These bundles are enabled by default.
 
-Minimal Linux Live has the concept of ``overlay bundles``. During the boot process the ``OverlayFS`` driver merges the initramfs with the content of these bundles. This is the mechanism which allows you to provide additional software on top of MLL without touching the core build process. In fact the overlay bundle system has been designed to be completely independent from the MLL build process. You can build one or more overlay bundles without building MLL at all. However, some of the overlay bundles have dependencies on the software pieces provided by the MLL build process, so it is recommended to use the overlay build subsystem after you have produced the 'initramfs' area.
+Hell Linux has the concept of ``overlay bundles``. During the boot process the ``OverlayFS`` driver merges the initramfs with the content of these bundles. This is the mechanism which allows you to provide additional software on top of MLL without touching the core build process. In fact the overlay bundle system has been designed to be completely independent from the MLL build process. You can build one or more overlay bundles without building MLL at all. However, some of the overlay bundles have dependencies on the software pieces provided by the MLL build process, so it is recommended to use the overlay build subsystem after you have produced the 'initramfs' area.
 
 The overlay bundle system provides dependency management. If bundle 'b' depends on bundle 'a' you don't need to build bundle 'a' manually in advance. The bundle dependencies are described in special metadata file ``bundle_deps`` and all such dependencies are prepared automatically.
 
