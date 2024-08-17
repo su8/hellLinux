@@ -1,4 +1,4 @@
-# Minimal Linux Live
+# Hell Linux Live
 
 * [Overview](#overview)
 * [Current development state](#current-development-state)
@@ -13,10 +13,6 @@
 * [Publications](#publications)
 * [Related projects](#related-projects)
 * [Thank you!](#thank-you)
-
-### Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/ivandavidov/minimal.svg)](https://starchart.cc/ivandavidov/minimal)
 
 ---
 
@@ -60,16 +56,6 @@ As of **09-Jun-2022**:
 * Busybox 1.34.1
 
 Stable build on default Ubuntu 22.04 installation with applied system updates.
-
-Here are some screenshots of the latest published version of Minimal Linux Live:
-
-![Minimal Linux Live](docs/assets/img/minimal_linux_live.png)
-
-![Minimal Linux Live Readme](docs/assets/img/readme_in_mll.png)
-
-You can experiment with Minimal Linux Live directly in your browser by using [JavaScript PC Emulator](http://minimal.idzona.com/emulator "Minimal Linux Live in JavaScript PC emulator"). Here is a screenshot:
-
-![Minimal Linux Live JavaScript Emulator](docs/assets/img/emulator_01.jpg)
 
 ### MLL on ARM (AArch64)
 
@@ -163,25 +149,9 @@ static-get -s tetris
 static-get -i vitetris
 ```
 
-### GraalVM
-
-The current development version of MLL partially supports [GraalVM](http://graalvm.org) (provided as overlay bundle). Note that GraalVM has runtime dependencies on ``GCC`` and ``Bash`` and therefore some GraalVM feature are not supported in MLL, e.g. the ``gu`` updater and almost all GVM language wrapper scripts, including the ``R`` wrappers. Nevertheless, the core GVM features work fine. Java, Python, Ruby, Node and JavaScript work in MLL/GraalVM environment. Great, isn't it! :)
-
-![GraalVM languages](docs/assets/img/graal/graal_1.jpg)
-
-![GraalVM - Java](docs/assets/img/graal/graal_2.jpg)
-
-![GraalVM - Python](docs/assets/img/graal/graal_3.jpg)
-
-![GraalVM - Ruby](docs/assets/img/graal/graal_4.jpg)
-
-![GraalVM - Node](docs/assets/img/graal/graal_5.jpg)
-
-![GraalVM - JS](docs/assets/img/graal/graal_6.jpg)
-
 ### BIOS and UEFI
 
-Minimal Linux Live can be used on UEFI systems (as of version ``28-Jan-2018``) thanks to the [systemd-boot](https://github.com/ivandavidov/systemd-boot) project. There are three build flavors that you can choose from:
+Hell Linux can be used on UEFI systems (as of version ``28-Jan-2018``) thanks to the [systemd-boot](https://github.com/ivandavidov/systemd-boot) project. There are three build flavors that you can choose from:
 
 * ``bios`` - MLL will be bootable only on legacy BIOS based systems. This is the default build flavor.
 * ``uefi`` - MLL will be bootable only on UEFI based systems.
@@ -201,7 +171,7 @@ Yet another way to install MLL on USB flash drive is by using the ``dd`` tool:
 
 ```
 # Directly write the ISO image to your USB flash device (e.g. /dev/xxx)
-dd if=minimal_linux_live.iso of=/dev/xxx
+dd if=hell_linux.iso of=/dev/xxx
 ```
 
 The USB flash device will be recognized as bootable device and you should be able to boot MLL successfully from it. If you have chosen the 'combined' build flavor (i.e. value ``both`` for the corresponding configuration property), then your USB flash device will be bootable on both legacy BIOS and modern UEFI based systems.
@@ -219,7 +189,7 @@ docker run -it minimal-linux-live /bin/sh
 It is also possible to start MLL over network, using PXE mechanism (often called PXE diskless boot). To achieve that, before building MLL, edit src/.config and set ``OVERLAY_LOCATION`` to ``rootfs`` instead of default ``iso``. Then follow build process, which will build the minimal_linux_live.iso. Extract kernel and rootfs from this iso, and assuming webserver is using ``/var/www/html/`` folder as index, copy files here:
 
 ```
-mount minimal_linux_live.iso /mnt
+mount hell_linux.iso /mnt
 cp -a /mnt/boot/kernel.xz /var/www/html/
 cp -a /mnt/boot/rootfs.xz /var/www/html/
 ```
@@ -292,6 +262,6 @@ List of cool forks, spin-offs and other related projects inspired by Minimal Lin
 
 ### Thank you!
 
-Don't miss the chance to share your honest opinion about MLL in [DistroWatch](http://distrowatch.com/dwres.php?resource=ratings&distro=mll). And don't forget to check the Minimal Linux Live page on [Facebook](http://facebook.com/MinimalLinuxLive).
+Big thanks to [ivandavidov](https://github.com/ivandavidov/minimal) for the base code which this fork is based on.
 
 Thank you for your support!
