@@ -33,7 +33,7 @@ else
   echo "Generated default kernel configuration."
 
   # Changes the name of the system to 'minimal'.
-  sed -i "s/.*CONFIG_DEFAULT_HOSTNAME.*/CONFIG_DEFAULT_HOSTNAME=\"minimal\"/" .config
+  sed -i "s/.*CONFIG_DEFAULT_HOSTNAME.*/CONFIG_DEFAULT_HOSTNAME=\"hellLinux\"/" .config
 
   # OVERLAYFS - BEGIN - most features are disabled (you don't really need them)
 
