@@ -7,7 +7,6 @@
 * [How to build](#how-to-build)
 * [Overlay bundles](#overlay-bundles)
 * [Runtime software](#runtime-software)
-* [GraalVM](#graalvm)
 * [BIOS and UEFI](#bios-and-uefi)
 * [Installation](#installation)
 * [Publications](#publications)
@@ -51,9 +50,9 @@ Did I mention the [YouTube channel](https://youtu.be/u5KYDaCLChc?list=PLe3TW5jDb
 
 As of **09-Jun-2024**:
 
-* Linux kernel 6.9.9
+* Linux kernel 6.6.1
 * GNU C Library 2.40
-* Busybox 1.34.1
+* Busybox 1.35.0
 
 Stable build on default Ubuntu 22.04 installation with applied system updates.
 
